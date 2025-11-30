@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lists, Conditionals, and Computed Properties</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="h-full grid place-items-center">
+    <div id="app">
+      <app-button>
+        submit
+      </app-button>
+  
+    </div>
+
+    <script>
+      let app = {
+        components: {
+          "app-button": {
+            template: `<button class="px-4 py-2 bg-blue-500 text-white rounded {{ processing ? 'opacity-50 cursor-not-allowed' : '' }}">{{ slot }}</button>`,
+            mounted() {
+            //   alert("App Button Mounted");
+            },
+            data() {
+              return {
+                processing: true ,
+              }
+            }
+          },
+          "assignment-list": {},
+          "assignment-list-item": {},
+          accordion: {},
+        },
+      };
+      Vue.createApp(app).mount("#app");
+    </script>
+  </body>
+</html>

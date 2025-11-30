@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Attribute Binding and Event Handling</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        display: grid;
+        place-items: center;
+      }
+
+      .text-red {
+        color: red;
+      }
+
+      .text-blue {
+        color: blue;
+      }
+
+      .text-green {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <button :class="buttonClasses" @click="changeButtonClass">
+        Click me!
+      </button>
+
+      <button @click="toggleActiveStatus" :class="activeStatus ? 'text-red' : 'text-blue'">Toggle Active Status</button>
+      <p>Active Status: {{ activeStatus }}</p>
+    </div>
+
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            buttonClasses: "text-red",
+            activeStatus: true,
+          };
+        },
+
+        mounted() {
+          setTimeout(() => {
+            this.buttonClasses = "text-blue";
+          }, 3000);
+          setTimeout(() => {
+            this.buttonClasses = "text-green";
+          }, 6000);
+        },
+
+        methods: {
+          changeButtonClass() {
+            this.buttonClasses = "text-blue";
+          },
+          toggleActiveStatus() {
+            this.activeStatus = !this.activeStatus;
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

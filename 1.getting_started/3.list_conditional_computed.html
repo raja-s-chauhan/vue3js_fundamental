@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lists, Conditionals, and Computed Properties</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="h-full grid place-items-center">
+    <div id="app">
+      <h1>Assignment</h1>
+
+      <ul>
+        <li v-for="assignment in assignments" :key="assignment.id">
+          <label>
+            <input type="checkbox" v-model="assignment.completed" /> {{
+            assignment.title }}</label
+          >
+        </li>
+      </ul>
+
+      <pre>
+        {{ assignments }}
+      </pre>
+
+      <!-- in progress list -->
+      <h2>In Progress</h2>
+      <ul>
+        <li
+          v-for="assignment in assignments.filter(assignment => !assignment.completed)"
+          :key="assignment.id"
+        >
+          <label>
+            <input type="checkbox" v-model="assignment.completed" /> {{
+            assignment.title }}</label
+          >
+        </li>
+      </ul>
+
+      <!--  -->
+      <section v-if="completAssignment.length > 0">
+        <h2>Completed</h2>
+        <ul>
+          <li v-for="assignment in completAssignment" :key="assignment.id">
+            <label>
+              <input type="checkbox" v-model="assignment.completed" /> {{
+              assignment.title }}</label
+            >
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <script>
+      let app = {
+        data() {
+          return {
+            assignments: [
+              {
+                id: 1,
+                title: "Finish the course",
+                completed: false,
+              },
+              {
+                id: 2,
+                title: "Learn Vue.js",
+                completed: false,
+              },
+              {
+                id: 3,
+                title: "Build a project",
+                completed: false,
+              },
+              {
+                id: 4,
+                title: "Get a job",
+                completed: false,
+              },
+            ],
+          };
+        },
+        computed: {
+          completAssignment() {
+            return this.assignments.filter(
+              (assignment) => assignment.completed
+            );
+          },
+        },
+      };
+      Vue.createApp(app).mount("#app");
+    </script>
+  </body>
+</html>
